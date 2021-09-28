@@ -57,7 +57,7 @@ if __name__ == "__main__":
 
 ### 125. Valid Palidrome(slicing)
 ```
-# 
+# 슬라이싱 사용
 import re # 정규 표현식 사용하기 위해서 import 
 
 def isPalindrome(s:str) -> bool:
