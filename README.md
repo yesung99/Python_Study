@@ -74,5 +74,29 @@ def main():
 
 if __name__ == "__main__":
     main()
-```    
+```
+
+### 815. Most common Word 
+문자열 paragraph가 주어지고 문자열 paragraph에서 단어를 금지 할 수 있는 banned words를 입력할 수 있다, banned words를 제외하고 paragraph에서 가장 빈번한 단어를 찾아야 한다 대소문자는 구분하지 않으며 리턴을 소문자로 해야 한다
+``` 
+import collections
+import re
+from typing import List
+
+def mostCommonWord(paragraph: str, banned: List[str]) -> str:
+    words = []
+    processing = re.sub('[^a-zA-Z]', ' ', paragraph).lower().split() # 알파벳이 아닌 경우 공백으로 대체하고 알파벳일 경우 소문자로 변경한다
+
+    for word in processing:
+        if not word in banned: # word 문자 안에 banned가 된 단어가 없을 경우
+            words.append(word) # words 리스트에 단어를 추가한다
+    return collections.Counter(words).most_common(1)[0][0] # 빈도수가 첫번째로 높은 단어를 출력한다
+
+def main():
+    findword = mostCommonWord("Bob hit a ball, the hit BALL flew far after it was hit.", ["hit"])
+    print("가장 큰 빈도수를 가진 단어: " + findword)
+
+if __name__ == "__main__":
+    main()
+```
     
