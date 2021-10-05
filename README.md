@@ -99,4 +99,23 @@ def main():
 if __name__ == "__main__":
     main()
 ```
-    
+
+### 937. Reorder Data in Log Files
+```
+from typing import List 
+
+class Solution: # 리트코드 제출용 코드
+    def reorderLogFiles(self, logs: List[str]) -> List[str]:
+        letters, digits = [], []
+        
+        for log in logs:
+            if log.split()[1].isdigit(): # logs = ["dig1 8 1 5 1"]를 split 하고 [dig1, 8, 1, 5, 1] 중 [1] 인덱스 즉 8이 숫자이면
+                digits.append(log) # digits에 append 한다
+            else:
+                letters.append(log) # 숫자가 아닐 경우 letters에 append 한다
+        # 3번 조건인 "식별자는 순서에 영향을 끼치지 않지만 문자가 동일할 경우 식별자 순으로 한다"를 만족 시키기 위해서
+        # lambda 함수를 사용한다 x 즉 log = ["let2 own kit dig"]가 들어오면 split을 하여 첫번째 정렬 기준을 [let2, own, kit, dig]의 인덱스 [1:]을 기준으로 정렬한다
+        # 만약 문자가 동일 할 경우에는 식별자 순으로 정렬하라고 하였으므로 두번째 키를 x.split()[0] 즉 let2을 기준으로 하여 다시 한번 정렬을 한다
+        letters.sort(key=lambda x: (x.split()[1:], x.split()[0])) 
+        return letters + digits
+```
